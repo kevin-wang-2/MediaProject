@@ -1,0 +1,16 @@
+export default {
+  primary: "#fc5c64",
+  secondary: "#4ecdc4",
+  black: "#000",
+  white: "#fff",
+  median: "#9e9999",
+  light: "#f8f4f4",
+  dark: "#262626",
+  tagline: "#1dbfa1",
+  danger: "#ff5252",
+  leave: "#ffe66d",
+  weight: "#56feb1",
+  gas: "#fef360",
+  time: "#fdc674",
+  category: "#3b3bfc",
+};

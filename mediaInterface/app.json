@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "mediaInterface",
+    "slug": "mediaInterface",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./app/assets/icon.png",
+    "splash": {
+      "image": "./app/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "Alexanderia.mediaInterface",
+      "buildNumber": "1.0.0"
+    },
+    "web": {
+      "favicon": "./app/assets/favicon.png"
+    },
+    "description": "美冰项目 06 用户界面"
+  }
+}
