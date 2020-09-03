@@ -1,33 +1,34 @@
-import client from "./client";
+import axios from "axios"
 
-const endpointListing = "/listings";
-const endpointMessages = "/messages";
-const endpointCategories = "/categories";
-const endpointGases = "/gases";
-const endpointFruits = "/fruits";
-const endpointWeight = "/weight";
-const endpointTime = "/time";
-const endpointImageUrl = "/imageUrl";
-const endpointfreshnessData = "/freshnessData";
-
-const getListings = () => client.get(endpointListing);
-const getMessages = () => client.get(endpointMessages);
-const getCategories = () => client.get(endpointCategories);
-const getGases = () => client.get(endpointGases);
-const getFruits = () => client.get(endpointFruits);
-const getWeight = () => client.get(endpointWeight);
-const getTime = () => client.get(endpointTime);
-const getImageUrl = () => client.get(endpointImageUrl);
-const getFreshnessData = () => client.get(endpointfreshnessData);
+const basePath = "www.yiyang-tech.com:8181"
 
 export default {
-  getListings,
-  getMessages,
-  getGases,
-  getCategories,
-  getFruits,
-  getWeight,
-  getTime,
-  getImageUrl,
-  getFreshnessData,
+  async initializeData() {
+    let timeStamp = Date.now() / 1000 - 3600 * 24;
+    let data = (await axios.get(basePath + "/monitor/after/" + timeStamp.toString())).data;
+    if(data.state !== "OK") {
+      throw {
+        error: data.error,
+        message: data.message
+      }
+    } else return data.data
+  },
+  async loadData() {
+    let data = (await axios.get(basePath + "/monitor")).data;
+    if(data.state !== "OK") {
+      throw {
+        error: data.error,
+        message: data.message
+      }
+    } else return data.data
+  },
+  async loadFreshness() {
+    let data = (await axios.get(basePath + "/freshness")).data;
+    if(data.state !== "OK") {
+      throw {
+        error: data.error,
+        message: data.message
+      }
+    } else return data.data
+  }
 };
