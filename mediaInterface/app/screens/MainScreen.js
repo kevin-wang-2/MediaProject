@@ -10,7 +10,11 @@ import AppMeasurementPicker from "../components/AppMeasurementPicker";
 
 import listings from "../api/listings";
 
+let i = 0;
+
 function MainScreen(props) {
+
+  console.log(i++)
 
   const [legacyData, setData] = useState([]);
   const [imageUrl, setImageUrl] = useState(staticImageUrl);
@@ -22,46 +26,51 @@ function MainScreen(props) {
 
   const initializeData = async () => {
     try {
-      setData(await listings.initializeData());
+      return setData(await listings.initializeData());
     } catch(e) {
-      if(e.error) setError(e.message);
-      else throw e;
+      if(e.error) return setError(e.message);
+      else return setError(e)
     }
   }
 
   const loadData = async () => {
     let newData = legacyData;
     if(newData.length > 9999) newData.shift();
-    try {
-      newData.push(await listings.loadData());
-      setData(newData);
-    } catch(e) {
-      if(e.error) setError(e.message);
-      else throw e;
-    }
     setImageUrl(staticImageUrl)
+    try {
+      let data = await listings.loadData()
+      console.log(data);
+      newData.push(data);
+      return setData(newData);
+    } catch(e) {
+      if(e.error) return setError(e.message);
+      else return setError("No Data");
+    }
   }
 
   const loadFreshnessData = async () => {
     try {
-      setFreshnessData(await listings.loadFreshness());
+      return setFreshnessData(await listings.loadFreshness());
     } catch(e) {
-      if(e.error) setError(e.message);
-      else throw e;
+      if(e.error) return setErrorFreshnessData(e.message);
+      else return setErrorFreshnessData("No Data");
     }
   }
 
-  setInterval(async () => {
-    await loadData();
-    await loadFreshnessData();
-  }, 1000);
+  if(i === 0) {
+    setInterval(async () => {
+      await loadData();
+      await loadFreshnessData();
+    }, 1000);
 
-  initializeData().then().catch((reason) => { throw reason; });
-
+    initializeData().then().catch((reason) => {
+      throw reason;
+    });
+  }
   useEffect(() => {
-    initializeData().then().catch((reason) => { throw reason; });
-    loadData().then().catch((reason) => { throw reason; });
-    loadFreshnessData().then().catch((reason) => { throw reason; });
+    initializeData();
+    loadData();
+    loadFreshnessData();
   }, []);
 
   return (

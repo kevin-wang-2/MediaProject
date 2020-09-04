@@ -1,10 +1,11 @@
 {
   "expo": {
-    "name": "mediaInterface",
+    "name": "美的智能冰箱分析",
     "slug": "mediaInterface",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
+    "sdkVersion": "38.0.0",
     "splash": {
       "image": "./app/assets/splash.png",
       "resizeMode": "contain",
@@ -16,6 +17,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.media.interface"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "Alexanderia.mediaInterface",
